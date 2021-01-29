@@ -17,7 +17,7 @@ for (var i=0; i < preloadImages.length; i++) {
   preloadImages[i] = "https://via.placeholder.com/420x320/ffffff/333333?text=Sample_" + i.toString();
 }
 
-for (var x=0;x<4;x++) {
+for (var x=0;x<5;x++) {
   /*
   This spawns concurrent processes.
   doesn't seem like there's any improvement after four proceses though,
@@ -58,8 +58,16 @@ function loadImage(src) {
   return new Promise(function(resolve, reject) {
 
     var img = new Image();
-    img.onload = function(){resolve(img);};
-    //img.onload = resolve(img);
+    /*
+    No idea what's going on;
+    wrapping resolve() with function seems to change its behavior.
+    resolve() alone is faster.
+    with 5 "processes",
+    with function takes 1.87 seconds,
+    whereas resolve alone takes 1.54 seconds.
+    */
+    //img.onload = function(){resolve(img);};
+    img.onload = resolve(img);
     img.src = src;
   });
 }
