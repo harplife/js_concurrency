@@ -14,13 +14,14 @@ var promisedImages = []; // actual image objects are stored here
 
 for (var i=0; i < preloadImages.length; i++) {
   // generating a bunch of images
+  // it's neat that placeholder images are available! So simple and brilliant.
   preloadImages[i] = "https://via.placeholder.com/420x320/ffffff/333333?text=Sample_" + i.toString();
 }
 
 for (var x=0;x<5;x++) {
   /*
   This spawns concurrent processes.
-  doesn't seem like there's any improvement after four proceses though,
+  doesn't seem like there's any improvement after five processes though,
   since it doesn't take too long for an image to download.
   There's definitely an improvement compared to just 1 process,
   since using 4 takes ~2.67 seconds, and using 1 takes ~8.52 seconds.
